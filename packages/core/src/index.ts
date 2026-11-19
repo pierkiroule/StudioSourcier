@@ -15,9 +15,10 @@ export const StopSchema = z
     experience: ExperienceSchema.nullable(),
   })
   .strict();
-export const ProjectSchema = z
+const ProjectBaseSchema = z
   .object({
-    schemaVersion: z.literal("1.0.0"),
+    schemaVersion: z.literal("1.1.0"),
+    extensions: z.record(z.string(), z.json()).default({}),
     id: z.uuid(),
     title: z.string().trim().min(1).max(160),
     description: z.string().max(4000),
@@ -33,27 +34,35 @@ export const ProjectSchema = z
         .strict(),
     ),
   })
-  .strict()
-  .superRefine((p, ctx) => {
-    const ids = new Set(p.stops.map((s) => s.id));
-    if (ids.size !== p.stops.length)
+  .strict();
+const validateRelations = (
+  p: { stops: { id: string }[]; relations: { from: string; to: string }[] },
+  ctx: z.RefinementCtx,
+) => {
+  const ids = new Set(p.stops.map((s) => s.id));
+  if (ids.size !== p.stops.length)
+    ctx.addIssue({
+      code: "custom",
+      message: "Identifiants d’escales dupliqués",
+    });
+  for (const r of p.relations)
+    if (!ids.has(r.from) || !ids.has(r.to))
       ctx.addIssue({
         code: "custom",
-        message: "Identifiants d’escales dupliqués",
+        message: "Relation vers une escale absente",
       });
-    for (const r of p.relations)
-      if (!ids.has(r.from) || !ids.has(r.to))
-        ctx.addIssue({
-          code: "custom",
-          message: "Relation vers une escale absente",
-        });
-  });
+};
+export const ProjectSchema = ProjectBaseSchema.superRefine(validateRelations);
+const LegacyProjectSchema = ProjectBaseSchema.omit({ extensions: true })
+  .extend({ schemaVersion: z.literal("1.0.0") })
+  .superRefine(validateRelations);
 export type Project = z.infer<typeof ProjectSchema>;
 export type Stop = z.infer<typeof StopSchema>;
 export type Experience = z.infer<typeof ExperienceSchema>;
 export function createProject(title = "Mon nouveau parcours"): Project {
   return {
-    schemaVersion: "1.0.0",
+    schemaVersion: "1.1.0",
+    extensions: {},
     id: crypto.randomUUID(),
     title,
     description: "",
@@ -86,7 +95,12 @@ export function moveStop(p: Project, id: string, delta: -1 | 1): Project {
 }
 // Explicit version boundary. Future migrations must be pure, chained and tested.
 export function parseProject(value: unknown): Project {
-  return ProjectSchema.parse(value);
+  const legacy = LegacyProjectSchema.safeParse(value);
+  return ProjectSchema.parse(
+    legacy.success
+      ? { ...legacy.data, schemaVersion: "1.1.0", extensions: {} }
+      : value,
+  );
 }
 export function serializeProject(p: Project): string {
   return JSON.stringify(parseProject(p), null, 2);

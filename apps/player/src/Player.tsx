@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Project, Stop } from "@sourciers/core";
 import type { ModuleRegistry } from "@sourciers/module-sdk";
 import { Empty } from "@sourciers/design-system";
@@ -36,29 +36,89 @@ export function ProjectPlayer({
   project: Project;
   registry: ModuleRegistry;
 }) {
-  const [selected, setSelected] = useState(project.stops[0]?.id);
-  const stop = project.stops.find((s) => s.id === selected) ?? project.stops[0];
+  const readHash = () => {
+    const hash = new URLSearchParams(location.hash.slice(1));
+    const id = hash.get("escale");
+    return project.stops.some((s) => s.id === id) ? id : undefined;
+  };
+  const [selected, setSelected] = useState(readHash);
+  useEffect(() => {
+    const onHash = () => setSelected(readHash());
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, [project.id]);
+  useEffect(() => {
+    document
+      .getElementById("journey-top")
+      ?.scrollIntoView?.({ block: "start" });
+  }, [selected]);
+  const stop = project.stops.find((s) => s.id === selected);
+  const modules = registry
+    .available()
+    .filter((m) => project.extensions[m.id] !== undefined);
   return (
-    <main className="standalone">
+    <main className="standalone" id="journey-top">
       <p className="eyebrow">Sourciers du Vivant •°</p>
       <h1>{project.title}</h1>
-      <p>{project.description}</p>
-      <nav className="player-nav" aria-label="Escales">
-        {project.stops.map((s) => (
-          <button
-            key={s.id}
-            aria-pressed={stop?.id === s.id}
-            onClick={() => setSelected(s.id)}
-          >
-            {s.title}
-          </button>
-        ))}
-      </nav>
-      {stop ? (
-        <StopPlayer stop={stop} registry={registry} />
-      ) : (
-        <Empty>Ce parcours ne contient pas encore d’escale.</Empty>
+      {!stop && (
+        <>
+          <p className="prose">{project.description}</p>
+          {modules.map((m) => {
+            const Intro = m.ProjectIntro;
+            return Intro ? (
+              <Intro key={m.id} data={project.extensions[m.id]!} />
+            ) : null;
+          })}
+          <nav className="journey-grid" id="escales" aria-label="Escales">
+            {project.stops.map((s, i) => (
+              <button
+                key={s.id}
+                onClick={() => {
+                  setSelected(s.id);
+                  location.hash = "escale=" + s.id;
+                }}
+              >
+                <span>Borne {i + 1}</span>
+                <strong>{s.title}</strong>
+                <small>
+                  {s.experience
+                    ? registry.resolve(s.experience).label
+                    : "À préparer"}
+                </small>
+              </button>
+            ))}
+          </nav>
+          {!project.stops.length && (
+            <Empty>Ce parcours ne contient pas encore d’escale.</Empty>
+          )}
+        </>
       )}
+      {stop && (
+        <section id="experience">
+          <p className="eyebrow">Borne {project.stops.indexOf(stop) + 1}</p>
+          <StopPlayer stop={stop} registry={registry} />
+          <a
+            className="journey-back"
+            href="#escales"
+            onClick={() => setSelected(undefined)}
+          >
+            Retour aux {project.stops.length} bornes
+          </a>
+          <a
+            className="journey-back"
+            style={{ marginLeft: 20 }}
+            href={"#escale=" + stop.id}
+          >
+            Lien direct de cette escale
+          </a>
+        </section>
+      )}
+      {modules.map((m) => {
+        const Footer = m.ProjectFooter;
+        return Footer ? (
+          <Footer key={m.id} data={project.extensions[m.id]!} />
+        ) : null;
+      })}
     </main>
   );
 }

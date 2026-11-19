@@ -1,6 +1,7 @@
 // Usage: pnpm publish:local -- project.json https://your-domain/path/
 import { cp, mkdir, readFile, writeFile, rm } from "node:fs/promises";
 import { resolve } from "node:path";
+import { createHash } from "node:crypto";
 import { createServer } from "vite";
 const args = process.argv.slice(2).filter((a) => a !== "--");
 if (args.length !== 2)
@@ -28,6 +29,7 @@ const server = await createServer({
   },
 });
 let project, manifest, qr;
+const stopQrs = [];
 try {
   const { parseProject } = await server.ssrLoadModule(
     "/packages/core/src/index.ts",
@@ -35,17 +37,28 @@ try {
   const { ModuleRegistry } = await server.ssrLoadModule(
     "/packages/module-sdk/src/index.ts",
   );
-  const { soundscapesModule } = await server.ssrLoadModule(
-    "/packages/modules/soundscapes/src/index.tsx",
-  );
+  const { soundscapesModule, soundscapesModuleV11 } =
+    await server.ssrLoadModule("/packages/modules/soundscapes/src/index.tsx");
   project = new ModuleRegistry()
     .register(soundscapesModule)
+    .register(soundscapesModuleV11)
     .validateProject(parseProject(JSON.parse(await readFile(input, "utf8"))));
   const publisher = await server.ssrLoadModule(
     "/packages/publisher/src/index.ts",
   );
   manifest = publisher.createManifest(project.title);
   qr = await publisher.createQrCode(url.href);
+  for (const [index, stop] of project.stops.entries()) {
+    const address = new URL(url.href);
+    address.hash = "escale=" + stop.id;
+    stopQrs.push({
+      id: stop.id,
+      number: index + 1,
+      title: stop.title,
+      url: address.href,
+      svg: await publisher.createQrCode(address.href),
+    });
+  }
 } finally {
   await server.close();
 }
@@ -72,12 +85,29 @@ const assets = [...html.matchAll(/(?:src|href)="(\.\/assets\/[^"?#]+)/g)].map(
   (m) => m[1],
 );
 // Cache app shell + document only. Private/remote audio is intentionally never cached.
-const version = project.id + "-" + Date.parse(project.updatedAt);
+const version =
+  project.id +
+  "-" +
+  createHash("sha256")
+    .update(JSON.stringify(project) + assets.join("|"))
+    .digest("hex")
+    .slice(0, 12);
 await writeFile(
   output + "/sw.js",
   `const CACHE=${JSON.stringify("sourciers-" + version)};const FILES=${JSON.stringify(["./", "./index.html", "./project.json", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", ...assets])};self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES))));self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('sourciers-${project.id}-')&&k!==CACHE).map(k=>caches.delete(k))))));self.addEventListener('fetch',e=>{const u=new URL(e.request.url);if(e.request.method!=='GET'||u.origin!==self.location.origin||!FILES.some(f=>new URL(f,self.registration.scope).href===u.href))return;e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)));});`,
 );
 await writeFile(output + "/qr.svg", qr);
+await mkdir(output + "/qr", { recursive: true });
+for (const stop of stopQrs)
+  await writeFile(output + "/qr/" + stop.id + ".svg", stop.svg);
+await writeFile(
+  output + "/qr/index.json",
+  JSON.stringify(
+    stopQrs.map(({ svg, ...stop }) => stop),
+    null,
+    2,
+  ),
+);
 console.log(
   "Publication statique préparée : " +
     output +

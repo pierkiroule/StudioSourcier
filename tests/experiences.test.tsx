@@ -1,10 +1,11 @@
 import { it, expect } from "vitest";
 import { render, screen, fireEvent, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { createProject } from "@sourciers/core";
 import { App } from "../apps/studio/src/App";
 async function start(type: string) {
   const user = userEvent.setup();
-  render(<App />);
+  render(<App initialProject={createProject()} />);
   await user.click(screen.getByRole("button", { name: /Ajouter une escale/ }));
   await user.click(
     screen.getByRole("button", {
@@ -112,7 +113,7 @@ it("imports valid JSON, rejects unsupported versions and confirms deletion", asy
 });
 it("restores a saved project on remount", async () => {
   const user = userEvent.setup();
-  const view = render(<App />);
+  const view = render(<App initialProject={createProject()} />);
   await user.click(screen.getByRole("button", { name: /Ajouter une escale/ }));
   view.unmount();
   render(<App />);

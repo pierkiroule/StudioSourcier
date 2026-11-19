@@ -1,11 +1,10 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { parseProject, type Project } from "@sourciers/core";
-import { ModuleRegistry } from "@sourciers/module-sdk";
-import { soundscapesModule } from "@sourciers/soundscapes";
+import { createStudioRegistry } from "../../registry";
 import { ProjectPlayer } from "./Player";
 import "../../../packages/design-system/src/style.css";
-const registry = new ModuleRegistry().register(soundscapesModule);
+const registry = createStudioRegistry();
 function App() {
   const [project, setProject] = React.useState<Project | null>(null);
   const [error, setError] = React.useState("");

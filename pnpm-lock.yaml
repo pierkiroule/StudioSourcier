@@ -7,6 +7,15 @@ settings:
 importers:
   .:
     dependencies:
+      "@sourciers/core":
+        specifier: workspace:*
+        version: link:packages/core
+      "@sourciers/module-sdk":
+        specifier: workspace:*
+        version: link:packages/module-sdk
+      "@sourciers/soundscapes":
+        specifier: workspace:*
+        version: link:packages/modules/soundscapes
       "@supabase/supabase-js":
         specifier: ^2.84.0
         version: 2.119.0
