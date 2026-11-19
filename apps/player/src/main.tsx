@@ -7,8 +7,24 @@ import "../../../packages/design-system/src/style.css";
 const registry = createStudioRegistry();
 function App() {
   const [project, setProject] = React.useState<Project | null>(null);
+  const [media, setMedia] = React.useState<Record<string, string>>({});
   const [error, setError] = React.useState("");
   React.useEffect(() => {
+    void fetch("./media.json")
+      .then((r) => (r.ok ? r.json() : {}))
+      .then((value: unknown) => {
+        if (!value || typeof value !== "object" || Array.isArray(value)) return;
+        const urls: Record<string, string> = {};
+        for (const [id, path] of Object.entries(value)) {
+          if (
+            typeof path === "string" &&
+            /^\.\/media\/[a-z0-9.-]+$/i.test(path)
+          )
+            urls[id] = new URL(path, location.href).href;
+        }
+        setMedia(urls);
+      })
+      .catch(() => {});
     void fetch("./project.json")
       .then((r) => {
         if (!r.ok) throw Error("Parcours absent. Importez un projet JSON.");
@@ -20,7 +36,7 @@ function App() {
       );
   }, []);
   return project ? (
-    <ProjectPlayer project={project} registry={registry} />
+    <ProjectPlayer project={project} registry={registry} media={media} />
   ) : (
     <main className="standalone">
       <h1>Sourciers Player •°</h1>

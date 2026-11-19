@@ -1006,3 +1006,104 @@ details {
     animation: none;
   }
 }
+/* Shared visual settings: the same surface in the Studio and the exported Player. */
+.journey-theme {
+  --green: var(--journey-primary);
+  color: var(--journey-ink);
+  background: var(--journey-paper);
+  font-family: var(--journey-font);
+  min-width: 0;
+}
+.journey-theme h1,
+.journey-theme h2,
+.journey-theme h3 {
+  font-family: var(--journey-font);
+  color: var(--journey-ink);
+}
+.journey-theme button {
+  border-radius: var(--journey-radius);
+  color: var(--journey-primary);
+}
+.journey-theme button.primary,
+.journey-theme button[aria-pressed="true"] {
+  background: var(--journey-primary);
+  color: #fff;
+}
+.journey-theme .experience-player {
+  background: var(--journey-surface);
+  border-radius: var(--journey-radius);
+}
+.journey-theme .invitation,
+.journey-theme .prose {
+  color: var(--journey-ink);
+}
+.journey-theme .eyebrow,
+.journey-theme .everyday h3 {
+  color: var(--journey-primary);
+}
+.journey-theme .ondograph path {
+  stroke: var(--journey-primary);
+}
+.visual-blocks {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 100%;
+}
+.visual-blocks.width-narrow {
+  max-width: 430px;
+}
+.visual-blocks.width-wide {
+  max-width: 760px;
+}
+.visual-blocks.align-left {
+  text-align: left;
+}
+.visual-blocks.align-center {
+  text-align: center;
+}
+.visual-block {
+  position: relative;
+  min-width: 0;
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+.visual-block.is-editable {
+  cursor: pointer;
+}
+.visual-block.is-editable:hover {
+  outline: 1px dashed var(--journey-primary);
+  outline-offset: 4px;
+}
+.visual-block.is-selected {
+  outline: 1px solid var(--journey-primary);
+  outline-offset: 4px;
+}
+.visual-block:focus-visible {
+  outline: 3px solid var(--journey-accent);
+  outline-offset: 4px;
+}
+.visual-block img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: auto;
+}
+.visual-block .everyday {
+  margin-top: 0;
+}
+.visual-block h2 {
+  margin-top: 5px;
+}
+.visual-block .ondograph {
+  margin: 0 auto;
+}
+.ondograph-svg {
+  height: 190px;
+  object-fit: contain;
+}
+.journey-theme .standalone {
+  margin: 0 auto;
+  padding-top: 35px;
+  min-height: 100vh;
+}

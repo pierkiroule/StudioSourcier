@@ -2,6 +2,11 @@ import { z } from "zod";
 export const AudioUrlSchema = z.union([
   z.literal(""),
   z
+    .string()
+    .regex(
+      /^asset:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+    ),
+  z
     .url()
     .refine(
       (s) => new URL(s).protocol === "https:",

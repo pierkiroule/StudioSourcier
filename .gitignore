@@ -9,3 +9,5 @@ coverage/
 *.log
 
 apps/studio/tests/compiled-player/
+
+apps/studio/public/engine/

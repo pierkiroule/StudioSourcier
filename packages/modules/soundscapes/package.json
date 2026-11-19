@@ -11,6 +11,7 @@
     "@sourciers/media": "workspace:*",
     "@sourciers/design-system": "workspace:*",
     "react": "^19.2.0",
-    "zod": "^4.1.12"
+    "zod": "^4.1.12",
+    "@sourciers/studio-tools": "workspace:*"
   }
 }
