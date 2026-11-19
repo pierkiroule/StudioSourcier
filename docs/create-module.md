@@ -51,3 +51,7 @@ Le registre fonctionne par installation de packages et compilation. « Module in
 Un module peut désormais fournir `projectSchema`, `ProjectEditor`, `ProjectIntro` et `ProjectFooter` pour des réglages et des contenus au niveau du projet. Ces composants reçoivent uniquement le document JSON de `project.extensions[module.id]`. Le registre valide cette extension avant sauvegarde/publication. Voir soundscapes 1.1.0.
 
 Pour faire coexister plusieurs versions, enregistrer chacune dans `apps/registry.ts` et dans le publisher. Utiliser `registry.available()` pour les choix de nouvelles expériences et `registry.resolve()` pour interpréter exactement les documents existants.
+
+## Blocs visuels facultatifs
+
+Une expérience peut exposer `PlayerBlocks` pour intégrer la sélection, le réordonnancement et la visibilité dans l’atelier. Son `Player` reste obligatoire pour compatibilité. Voir [le contrat transversal et son exemple sonore](atelier-local.md#contrat-dextension) et `packages/modules/soundscapes/src/blocks.tsx`. Le Core ne doit jamais importer ces composants.

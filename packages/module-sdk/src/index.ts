@@ -1,4 +1,4 @@
-import type { ComponentType } from "react";
+import type { ComponentType, ReactNode } from "react";
 import { z } from "zod";
 import { Version, type Experience, type Project } from "@sourciers/core";
 export const SDK_VERSION = "1.0.0" as const;
@@ -12,6 +12,12 @@ export interface ExperienceDefinition {
   defaults: () => Content;
   Editor: ComponentType<{ data: Content; onChange: (data: Content) => void }>;
   Player: ComponentType<{ data: Content }>;
+  PlayerBlocks?: ComponentType<{
+    data: Content;
+    renderBlocks: (
+      blocks: readonly { id: string; label: string; content: ReactNode }[],
+    ) => ReactNode;
+  }>;
 }
 export interface StudioModule {
   id: string;
@@ -28,8 +34,21 @@ export interface StudioModule {
   ProjectFooter?: ComponentType<{ data: Project["extensions"][string] }>;
 }
 export class ModuleRegistry {
+  private projectExtensions = new Map<string, z.ZodType>();
+  registerProjectExtension(id: string, schema: z.ZodType) {
+    if (!/^[a-z][a-z0-9-]*$/.test(id))
+      throw Error("Identité d’extension invalide");
+    if (this.list().some((m) => m.id === id))
+      throw Error("Identifiant déjà utilisé par un module");
+    if (this.projectExtensions.has(id))
+      throw Error("Extension déjà enregistrée");
+    this.projectExtensions.set(id, schema);
+    return this;
+  }
   private modules = new Map<string, StudioModule>();
   register(module: StudioModule) {
+    if (this.projectExtensions.has(module.id))
+      throw Error("Identifiant déjà utilisé par une extension");
     if (
       !/^[a-z][a-z0-9-]*$/.test(module.id) ||
       !Version.safeParse(module.version).success
@@ -84,6 +103,11 @@ export class ModuleRegistry {
   }
   validateProject(p: Project) {
     for (const [id, data] of Object.entries(p.extensions)) {
+      const tool = this.projectExtensions.get(id);
+      if (tool) {
+        tool.parse(data);
+        continue;
+      }
       const module = this.available().find((m) => m.id === id);
       if (!module?.projectSchema)
         throw Error("Extension de projet inconnue : " + id);

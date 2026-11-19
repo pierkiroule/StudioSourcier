@@ -16,6 +16,7 @@ const server = await createServer({
   server: { middlewareMode: true },
   resolve: {
     alias: {
+      "@sourciers/studio-tools": resolve("packages/studio-tools/src/index.ts"),
       "@sourciers/core": resolve("packages/core/src/index.ts"),
       "@sourciers/module-sdk": resolve("packages/module-sdk/src/index.ts"),
       "@sourciers/soundscapes": resolve(
@@ -39,10 +40,18 @@ try {
   );
   const { soundscapesModule, soundscapesModuleV11 } =
     await server.ssrLoadModule("/packages/modules/soundscapes/src/index.tsx");
+  const { AppearanceSchema, assetIds } = await server.ssrLoadModule(
+    "/packages/studio-tools/src/model.ts",
+  );
   project = new ModuleRegistry()
+    .registerProjectExtension("appearance", AppearanceSchema)
     .register(soundscapesModule)
     .register(soundscapesModuleV11)
     .validateProject(parseProject(JSON.parse(await readFile(input, "utf8"))));
+  if (assetIds(project).size)
+    throw Error(
+      "Ce projet contient des médias locaux : exportez la version Player depuis le Studio pour inclure les fichiers.",
+    );
   const publisher = await server.ssrLoadModule(
     "/packages/publisher/src/index.ts",
   );

@@ -1,3 +1,10 @@
+import {
+  useAnimation,
+  useReducedMotion,
+  useMediaUrl,
+  svgDataUrl,
+} from "@sourciers/studio-tools";
+import { SoundscapeBlocks } from "./blocks";
 import { useState } from "react";
 import { z } from "zod";
 import type {
@@ -261,6 +268,22 @@ export function Ondograph({
   wave: (typeof waves)[number];
   playing?: boolean;
 }) {
+  const settings = useAnimation();
+  const reduced = useReducedMotion();
+  if (settings.customSvg) {
+    try {
+      return (
+        <img
+          className="ondograph custom-ondograph"
+          src={svgDataUrl(settings.customSvg, reduced || settings.paused)}
+          alt=""
+          aria-hidden="true"
+        />
+      );
+    } catch {
+      return <p className="notice">Le SVG doit être corrigé dans l’atelier.</p>;
+    }
+  }
   const variation = waves.indexOf(wave);
   return (
     <svg
@@ -270,16 +293,16 @@ export function Ondograph({
       aria-hidden="true"
     >
       <ellipse cx="160" cy="75" rx="120" ry="55" fill="#e8f0f2" />
-      {Array.from({ length: 7 }, (_, i) => {
-        const y = 38 + i * 12;
-        const a = 5 + variation * 1.3 + i * 1.5;
+      {Array.from({ length: settings.density }, (_, i) => {
+        const y = 25 + i * (100 / settings.density);
+        const a = settings.amplitude + variation * 0.4 + i * 0.4;
         return (
           <path
             key={i}
             d={`M 18 ${y} C 70 ${y - a}, 87 ${y + a}, 137 ${y} S 230 ${y - a}, 300 ${y + (i % 2 ? 3 : -3)}`}
             fill="none"
             stroke={i % 2 ? "#587c91" : "#92a9b5"}
-            strokeWidth={i % 3 === 0 ? 1.8 : 1}
+            strokeWidth={settings.thickness}
             opacity={0.35 + i * 0.065}
             style={{ animationDelay: `${i * -0.8}s` }}
           />
@@ -288,7 +311,7 @@ export function Ondograph({
     </svg>
   );
 }
-function Everyday({ text }: { text: string }) {
+export function Everyday({ text }: { text: string }) {
   return text ? (
     <section className="everyday">
       <h3>Et dans votre quotidien ?</h3>
@@ -296,7 +319,7 @@ function Everyday({ text }: { text: string }) {
     </section>
   ) : null;
 }
-function Recording({
+export function Recording({
   url,
   transcript = "",
   credits = "",
@@ -307,15 +330,16 @@ function Recording({
   credits?: string;
   onPlaying: (state: boolean) => void;
 }) {
+  const resolvedUrl = useMediaUrl(url);
   return (
     <>
-      {url ? (
+      {resolvedUrl ? (
         <audio
           key={url}
           aria-label="Écouter le paysage sonore"
           controls
           preload="none"
-          src={url}
+          src={resolvedUrl}
           onPlay={() => onPlaying(true)}
           onPause={() => onPlaying(false)}
           onEnded={() => onPlaying(false)}
@@ -774,7 +798,16 @@ export const soundscapesModuleV11: StudioModule = {
   version: "1.1.0",
   sdkVersion: "1.0.0",
   label: "Parcours sonores",
-  experiences: [inSitu, audio, seasonal, surprise],
+  experiences: [inSitu, audio, seasonal, surprise].map((def) => ({
+    ...def,
+    PlayerBlocks: ({ data, renderBlocks }) => (
+      <SoundscapeBlocks
+        type={def.type}
+        data={data}
+        renderBlocks={renderBlocks}
+      />
+    ),
+  })),
   projectSchema: ProjectContentSchema,
   ProjectEditor: ProjectContentEditor,
   ProjectIntro,

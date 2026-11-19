@@ -26,3 +26,11 @@
 - Documenter chaque ajout de module et toute limite observée.
 - Ne pas ouvrir de jalon suivant tant que la V0.1 n’est pas vérifiée.
 - Ne pas écraser l’historique Git distant. Livrer sur une branche avec une PR quand le dépôt cible est identifié.
+
+## Atelier local
+
+- Garder les fichiers binaires dans IndexedDB et les références logiques dans les projets. Ne jamais sérialiser des URL blob temporaires.
+- Valider une archive complète avant sa restauration atomique ; préserver les brouillons remplacés.
+- Une version publiée locale est indépendante du brouillon. Toute personnalisation doit être visible dans le Player exporté.
+- SVG : liste de formes/animations autorisées, validation puis image isolée ; jamais de JavaScript ou de HTML importé exécuté.
+- Mettre à jour les tests de restauration et le contrat versionné lors d’une évolution des outils.

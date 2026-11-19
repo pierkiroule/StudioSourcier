@@ -5,6 +5,7 @@ import { builtInCreations } from "../../../creations";
 import { createStudioRegistry } from "../../registry";
 import { App } from "./App";
 import "../../../packages/design-system/src/style.css";
+import "./studio.css";
 const params = new URLSearchParams(location.search);
 const creation = builtInCreations.find(
   (c) => c.slug === params.get("creation"),
@@ -22,3 +23,9 @@ createRoot(document.getElementById("root")!).render(
     )}
   </React.StrictMode>,
 );
+
+if ("serviceWorker" in navigator && import.meta.env.PROD) {
+  void navigator.serviceWorker.register("./sw.js").catch(() => {
+    /* Local saving remains available without offline installation. */
+  });
+}

@@ -1,3 +1,4 @@
+import { useMediaUrl } from "@sourciers/studio-tools";
 import { useState } from "react";
 import { z } from "zod";
 import type {
@@ -71,14 +72,15 @@ function Text({
   );
 }
 function Audio({ url, transcript }: { url: string; transcript?: string }) {
+  const resolvedUrl = useMediaUrl(url);
   return (
     <>
-      {url ? (
+      {resolvedUrl ? (
         <audio
           aria-label="Écouter le paysage sonore"
           controls
           preload="none"
-          src={url}
+          src={resolvedUrl}
         >
           Votre navigateur ne prend pas en charge l’audio.
         </audio>

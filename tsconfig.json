@@ -21,7 +21,10 @@
       "@sourciers/design-system": ["./packages/design-system/src/index.tsx"],
       "@sourciers/media": ["./packages/media/src/index.ts"],
       "@sourciers/publisher": ["./packages/publisher/src/index.ts"],
-      "@sourciers/soundscapes": ["./packages/modules/soundscapes/src/index.tsx"]
+      "@sourciers/soundscapes": [
+        "./packages/modules/soundscapes/src/index.tsx"
+      ],
+      "@sourciers/studio-tools": ["./packages/studio-tools/src/index.ts"]
     },
     "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
   },

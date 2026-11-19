@@ -1,5 +1,11 @@
 import { afterEach, it, expect } from "vitest";
-import { render, screen, fireEvent, within } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  within,
+  waitFor,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {
   createProject,
@@ -22,6 +28,7 @@ import {
   toggleFeedbackTag,
   soundscapesModuleV11,
 } from "@sourciers/soundscapes";
+import { repository } from "../apps/studio/src/local/repository";
 const registry = createStudioRegistry();
 const seed = () => builtInCreations[0]!.create();
 afterEach(() => history.replaceState(null, "", location.pathname));
@@ -78,19 +85,23 @@ it("opens Heinlex on first visit and preserves an existing authored draft", () =
 it("loads the first creation into the Studio, edits it, and previews the actual draft", async () => {
   const user = userEvent.setup();
   render(<App />);
-  expect(screen.getByLabelText("Nom du parcours")).toHaveValue(
+  expect(await screen.findByLabelText("Nom du parcours")).toHaveValue(
     "Heinlex 2027 •° — Oreillez-vous !",
   );
   expect(
-    within(screen.getByRole("list")).getAllByRole("listitem"),
+    within(screen.getByRole("list", { name: "Escales" })).getAllByRole(
+      "listitem",
+    ),
   ).toHaveLength(13);
   fireEvent.change(screen.getByLabelText("Nom de l’escale"), {
     target: { value: "Mon écoute lointaine" },
   });
-  expect(
-    JSON.parse(localStorage.getItem("sourciers:current:v1")!).stops[0].title,
-  ).toBe("Mon écoute lointaine");
-  await user.click(screen.getByRole("button", { name: "Parcourir le projet" }));
+  await waitFor(async () =>
+    expect((await repository.projects())[0]!.stops[0]!.title).toBe(
+      "Mon écoute lointaine",
+    ),
+  );
+  await user.click(screen.getByRole("button", { name: "Prévisualiser" }));
   expect(screen.getByRole("navigation", { name: "Escales" })).toBeVisible();
   await user.click(
     screen.getByRole("button", { name: /Mon écoute lointaine/ }),
@@ -106,11 +117,14 @@ it("opens the prepared creation without losing the existing project", async () =
   const user = userEvent.setup();
   const p = createProject("Création à conserver");
   render(<App initialProject={p} />);
+  await user.click(screen.getByRole("button", { name: "Créations" }));
   await user.click(
     screen.getByRole("button", { name: "Ouvrir dans le Studio" }),
   );
-  expect(screen.getByLabelText("Nom du parcours")).toHaveValue(seed().title);
-  expect(localStorage.getItem("sourciers:project:" + p.id)).toContain(
+  expect(await screen.findByLabelText("Nom du parcours")).toHaveValue(
+    seed().title,
+  );
+  expect((await repository.projects()).find((v) => v.id === p.id)!.title).toBe(
     "Création à conserver",
   );
 });
@@ -230,18 +244,18 @@ it("keeps feedback optional, exclusive choices consistent and prevents false sen
   ).toHaveValue("");
 });
 
-it("requires confirmation to reload the version from code and restores the source content", async () => {
+it("requires confirmation before reloading prepared content and retains recovery snapshot", async () => {
   const user = userEvent.setup();
   render(<App />);
-  fireEvent.change(screen.getByLabelText("Nom de l’escale"), {
+  fireEvent.change(await screen.findByLabelText("Nom de l’escale"), {
     target: { value: "Une modification locale" },
   });
+  await user.click(screen.getByRole("button", { name: "Créations" }));
   await user.click(
     screen.getByRole("button", { name: "Recharger la version du code" }),
   );
-  await user.click(screen.getByRole("button", { name: "Annuler" }));
-  expect(screen.getByLabelText("Nom de l’escale")).toHaveValue(
-    "Une modification locale",
+  await user.click(
+    within(screen.getByRole("dialog")).getByRole("button", { name: "Annuler" }),
   );
   await user.click(
     screen.getByRole("button", { name: "Recharger la version du code" }),
@@ -249,9 +263,16 @@ it("requires confirmation to reload the version from code and restores the sourc
   await user.click(
     screen.getByRole("button", { name: "Recharger le parcours" }),
   );
-  expect(screen.getByLabelText("Nom de l’escale")).toHaveValue(
-    "Les sons lointains",
+  await waitFor(() =>
+    expect(screen.getByLabelText("Nom de l’escale")).toHaveValue(
+      "Les sons lointains",
+    ),
   );
+  expect(
+    (await repository.snapshots()).some(
+      (s) => s.project.stops[0]?.title === "Une modification locale",
+    ),
+  ).toBe(true);
 });
 it("makes every track eligible for the initial surprise and never immediately repeats", () => {
   expect(nextSurpriseIndex(3, -1, () => 0)).toBe(0);

@@ -7,6 +7,15 @@ settings:
 importers:
   .:
     dependencies:
+      "@dnd-kit/core":
+        specifier: 6.3.1
+        version: 6.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      "@dnd-kit/sortable":
+        specifier: 10.0.0
+        version: 10.0.0(@dnd-kit/core@6.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)
+      "@dnd-kit/utilities":
+        specifier: 3.2.2
+        version: 3.2.2(react@19.3.1)
       "@sourciers/core":
         specifier: workspace:*
         version: link:packages/core
@@ -16,9 +25,21 @@ importers:
       "@sourciers/soundscapes":
         specifier: workspace:*
         version: link:packages/modules/soundscapes
+      "@sourciers/studio-tools":
+        specifier: workspace:*
+        version: link:packages/studio-tools
       "@supabase/supabase-js":
         specifier: ^2.84.0
         version: 2.119.0
+      dompurify:
+        specifier: 3.4.15
+        version: 3.4.15
+      fflate:
+        specifier: 0.8.2
+        version: 0.8.2
+      idb:
+        specifier: 8.0.3
+        version: 8.0.3
       qrcode:
         specifier: ^1.5.4
         version: 1.5.4
@@ -56,6 +77,9 @@ importers:
       "@vitejs/plugin-react":
         specifier: ^5.1.1
         version: 5.2.0(vite@7.3.8(@types/node@24.19.2))
+      fake-indexeddb:
+        specifier: 6.2.4
+        version: 6.2.4
       jsdom:
         specifier: ^27.2.0
         version: 27.4.0
@@ -89,6 +113,9 @@ importers:
       "@sourciers/soundscapes":
         specifier: workspace:*
         version: link:../../packages/modules/soundscapes
+      "@sourciers/studio-tools":
+        specifier: workspace:*
+        version: link:../../packages/studio-tools
       react:
         specifier: ^19.2.0
         version: 19.3.1
@@ -98,6 +125,15 @@ importers:
 
   apps/studio:
     dependencies:
+      "@dnd-kit/core":
+        specifier: 6.3.1
+        version: 6.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      "@dnd-kit/sortable":
+        specifier: 10.0.0
+        version: 10.0.0(@dnd-kit/core@6.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)
+      "@dnd-kit/utilities":
+        specifier: 3.2.2
+        version: 3.2.2(react@19.3.1)
       "@sourciers/core":
         specifier: workspace:*
         version: link:../../packages/core
@@ -116,9 +152,18 @@ importers:
       "@sourciers/soundscapes":
         specifier: workspace:*
         version: link:../../packages/modules/soundscapes
+      "@sourciers/studio-tools":
+        specifier: workspace:*
+        version: link:../../packages/studio-tools
       "@supabase/supabase-js":
         specifier: ^2.84.0
         version: 2.119.0
+      fflate:
+        specifier: 0.8.2
+        version: 0.8.2
+      idb:
+        specifier: 8.0.3
+        version: 8.0.3
       react:
         specifier: ^19.2.0
         version: 19.3.1
@@ -167,6 +212,9 @@ importers:
       "@sourciers/module-sdk":
         specifier: workspace:*
         version: link:../../module-sdk
+      "@sourciers/studio-tools":
+        specifier: workspace:*
+        version: link:../../studio-tools
       react:
         specifier: ^19.2.0
         version: 19.3.1
@@ -182,6 +230,21 @@ importers:
       qrcode:
         specifier: ^1.5.4
         version: 1.5.4
+
+  packages/studio-tools:
+    dependencies:
+      "@sourciers/core":
+        specifier: workspace:*
+        version: link:../core
+      dompurify:
+        specifier: 3.4.15
+        version: 3.4.15
+      react:
+        specifier: ^19.2.0
+        version: 19.3.1
+      zod:
+        specifier: ^4.1.12
+        version: 4.6.7
 
 packages:
   "@acemir/cssom@0.9.33":
@@ -414,6 +477,40 @@ packages:
         integrity: sha512-gdkFe/Z4KU1q8Y5S3GYScXGcOnO56dgWwIs5+97Ij1VIKISItOIUlCXUq4VLbdnRclF+SSQ49sLsn3KeV111AA==,
       }
     engines: { node: ">=20.19.0" }
+
+  "@dnd-kit/accessibility@3.1.1":
+    resolution:
+      {
+        integrity: sha512-2P+YgaXF+gRsIihwwY1gCsQSYnu9Zyj2py8kY5fFvUM1qm2WA2u639R6YNVfU4GWr+ZM5mqEsfHZZLoRONbemw==,
+      }
+    peerDependencies:
+      react: ">=16.8.0"
+
+  "@dnd-kit/core@6.3.1":
+    resolution:
+      {
+        integrity: sha512-xkGBRQQab4RLwgXxoqETICr6S5JlogafbhNsidmrkVv2YRs5MLwpjoF2qpiGjQt8S9AoxtIV603s0GIUpY5eYQ==,
+      }
+    peerDependencies:
+      react: ">=16.8.0"
+      react-dom: ">=16.8.0"
+
+  "@dnd-kit/sortable@10.0.0":
+    resolution:
+      {
+        integrity: sha512-+xqhmIIzvAYMGfBYYnbKuNicfSsk4RksY2XdmJhT+HAC01nix6fHCztU68jooFiMUB01Ky3F0FyOvhG/BZrWkg==,
+      }
+    peerDependencies:
+      "@dnd-kit/core": ^6.3.0
+      react: ">=16.8.0"
+
+  "@dnd-kit/utilities@3.2.2":
+    resolution:
+      {
+        integrity: sha512-+MKAJEOfaBe5SmV6t34p80MMKhjvUz0vRrvVJbPT0WElzaOJ/1xs+D+KDv+tD/NE5ujfrChEcshd4fLn0wpiqg==,
+      }
+    peerDependencies:
+      react: ">=16.8.0"
 
   "@esbuild/aix-ppc64@0.28.2":
     resolution:
@@ -1087,6 +1184,12 @@ packages:
         integrity: sha512-N0rFCuH9YoxG9/m61l9MfpJKfmLOVU0em7ipIz6TRgSSkvReLB9vL85GB+yr8Bs5leqpvg96JSwF4ZS1s4viQg==,
       }
 
+  "@types/trusted-types@2.0.7":
+    resolution:
+      {
+        integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==,
+      }
+
   "@vitejs/plugin-react@5.2.0":
     resolution:
       {
@@ -1365,6 +1468,12 @@ packages:
         integrity: sha512-7ZgogeTnjuHbo+ct10G9Ffp0mif17idi0IyWNVA/wcwcm7NPOD/WEHVP3n7n3MhXqxoIYm8d6MuZohYWIZ4T3w==,
       }
 
+  dompurify@3.4.15:
+    resolution:
+      {
+        integrity: sha512-EUBjM+B+lkDE41iE82DDSCfkoPGfXx8IxFxPMjNzm/Uk4xDet77rTN9wqlxlVg71kK7XGuUMv6wUxJUwwv+Xyw==,
+      }
+
   electron-to-chromium@1.5.490:
     resolution:
       {
@@ -1418,6 +1527,13 @@ packages:
       }
     engines: { node: ">=12.0.0" }
 
+  fake-indexeddb@6.2.4:
+    resolution:
+      {
+        integrity: sha512-INKeIKEtSViN4yVtEWEUqbsqmaIy7Ls+MfU0yxQVXg67pOJ/sH1ZxcVrP8XrKULUFohcPD9gnmym+qBfEybACw==,
+      }
+    engines: { node: ">=18" }
+
   fdir@6.5.0:
     resolution:
       {
@@ -1429,6 +1545,12 @@ packages:
     peerDependenciesMeta:
       picomatch:
         optional: true
+
+  fflate@0.8.2:
+    resolution:
+      {
+        integrity: sha512-cPJU47OaAoCbg0pBvzsgpTPhmhqI5eJjh/JIu8tPj5q+T7iLvW/JAYUqmE7KOB4R1ZyEhzBaIQpQpardBF5z8A==,
+      }
 
   find-up@4.1.0:
     resolution:
@@ -1486,6 +1608,12 @@ packages:
         integrity: sha512-1dhVQZXhcHje7798IVM+xoo/1ZdVfzOMIc8/rgVSijRK38EDqOJoGula9N/8ZI5RD8QTxNQtK/Gozpr+qUqRRA==,
       }
     engines: { node: ">=20.0.0" }
+
+  idb@8.0.3:
+    resolution:
+      {
+        integrity: sha512-LtwtVyVYO5BqRvcsKuB2iUMnHwPVByPCXFXOpuU96IZPPoPN6xjOGxZQ74pgSVVLQWtUOYgyeL4GE98BY5D3wg==,
+      }
 
   indent-string@4.0.0:
     resolution:
@@ -2326,6 +2454,31 @@ snapshots:
 
   "@csstools/css-tokenizer@4.0.3": {}
 
+  "@dnd-kit/accessibility@3.1.1(react@19.3.1)":
+    dependencies:
+      react: 19.3.1
+      tslib: 2.8.1
+
+  "@dnd-kit/core@6.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)":
+    dependencies:
+      "@dnd-kit/accessibility": 3.1.1(react@19.3.1)
+      "@dnd-kit/utilities": 3.2.2(react@19.3.1)
+      react: 19.3.1
+      react-dom: 19.3.1(react@19.3.1)
+      tslib: 2.8.1
+
+  "@dnd-kit/sortable@10.0.0(@dnd-kit/core@6.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)":
+    dependencies:
+      "@dnd-kit/core": 6.3.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      "@dnd-kit/utilities": 3.2.2(react@19.3.1)
+      react: 19.3.1
+      tslib: 2.8.1
+
+  "@dnd-kit/utilities@3.2.2(react@19.3.1)":
+    dependencies:
+      react: 19.3.1
+      tslib: 2.8.1
+
   "@esbuild/aix-ppc64@0.28.2":
     optional: true
 
@@ -2619,6 +2772,9 @@ snapshots:
     dependencies:
       csstype: 3.2.4
 
+  "@types/trusted-types@2.0.7":
+    optional: true
+
   "@vitejs/plugin-react@5.2.0(vite@7.3.8(@types/node@24.19.2))":
     dependencies:
       "@babel/core": 7.29.13
@@ -2774,6 +2930,10 @@ snapshots:
 
   dom-accessibility-api@0.6.3: {}
 
+  dompurify@3.4.15:
+    optionalDependencies:
+      "@types/trusted-types": 2.0.7
+
   electron-to-chromium@1.5.490: {}
 
   emoji-regex@8.0.0: {}
@@ -2819,9 +2979,13 @@ snapshots:
 
   expect-type@1.4.0: {}
 
+  fake-indexeddb@6.2.4: {}
+
   fdir@6.5.0(picomatch@4.0.7):
     optionalDependencies:
       picomatch: 4.0.7
+
+  fflate@0.8.2: {}
 
   find-up@4.1.0:
     dependencies:
@@ -2856,6 +3020,8 @@ snapshots:
       - supports-color
 
   iceberg-js@0.8.1: {}
+
+  idb@8.0.3: {}
 
   indent-string@4.0.0: {}
 

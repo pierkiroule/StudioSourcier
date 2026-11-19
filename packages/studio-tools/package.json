@@ -1,0 +1,15 @@
+{
+  "name": "@sourciers/studio-tools",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "zod": "^4.1.12",
+    "dompurify": "3.4.15",
+    "@sourciers/core": "workspace:*"
+  }
+}

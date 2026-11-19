@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { describe, it, expect } from "vitest";
 import { ModuleRegistry, type StudioModule } from "@sourciers/module-sdk";
 import { soundscapesModule, seasonAt } from "@sourciers/soundscapes";
@@ -89,5 +90,31 @@ it("rejects invalid defaults and incomplete seasonal payloads", () => {
       type: "seasonal",
       data: { invitation: "", seasons: { winter: "" }, notes: {} },
     }),
+  ).toThrow();
+});
+
+it("validates independent project tools and rejects namespace collisions", () => {
+  const schema = z.object({ version: z.literal("1.0.0") }).strict();
+  const r = new ModuleRegistry()
+    .registerProjectExtension("appearance", schema)
+    .register(soundscapesModule);
+  expect(
+    r.validateProject({
+      ...createProject(),
+      extensions: { appearance: { version: "1.0.0" } },
+    }),
+  ).toBeTruthy();
+  expect(() =>
+    r.validateProject({
+      ...createProject(),
+      extensions: { appearance: { version: "2.0.0" } },
+    }),
+  ).toThrow();
+  expect(() => r.registerProjectExtension("appearance", schema)).toThrow();
+  expect(() => r.registerProjectExtension("soundscapes", schema)).toThrow();
+  expect(() =>
+    new ModuleRegistry()
+      .registerProjectExtension("soundscapes", schema)
+      .register(soundscapesModule),
   ).toThrow();
 });
