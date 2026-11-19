@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@sourciers/core": ["./packages/core/src/index.ts"],
+      "@sourciers/module-sdk": ["./packages/module-sdk/src/index.ts"],
+      "@sourciers/design-system": ["./packages/design-system/src/index.tsx"],
+      "@sourciers/media": ["./packages/media/src/index.ts"],
+      "@sourciers/publisher": ["./packages/publisher/src/index.ts"],
+      "@sourciers/soundscapes": ["./packages/modules/soundscapes/src/index.tsx"]
+    },
+    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"]
+  },
+  "include": ["apps", "packages", "tests", "vitest.config.ts"]
+}

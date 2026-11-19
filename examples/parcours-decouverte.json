@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "71f62a17-5952-4939-a336-92719d9f9af3",
+  "title": "Les r\u00e9sonances du jardin",
+  "description": "Trois escales pour rencontrer le vivant, \u00e0 son rythme.",
+  "updatedAt": "2026-11-19T15:00:00.000Z",
+  "relations": [],
+  "stops": [
+    {
+      "id": "62c58f33-0000-4000-8000-000000000001",
+      "title": "Sous le grand arbre",
+      "experience": {
+        "moduleId": "soundscapes",
+        "moduleVersion": "1.0.0",
+        "type": "in-situ",
+        "data": {
+          "invitation": "Laissez venir les sons. Les plus proches, puis ceux qui se cachent au loin.",
+          "duration": 60
+        }
+      }
+    },
+    {
+      "id": "62c58f33-0001-4000-8000-000000000001",
+      "title": "Un paysage \u00e0 retrouver",
+      "experience": {
+        "moduleId": "soundscapes",
+        "moduleVersion": "1.0.0",
+        "type": "audio",
+        "data": {
+          "invitation": "Un enregistrement pourra prolonger cette rencontre.",
+          "url": "",
+          "transcript": ""
+        }
+      }
+    },
+    {
+      "id": "62c58f33-0002-4000-8000-000000000001",
+      "title": "Le jardin se transforme",
+      "experience": {
+        "moduleId": "soundscapes",
+        "moduleVersion": "1.0.0",
+        "type": "seasonal",
+        "data": {
+          "invitation": "Un m\u00eame lieu, quatre fa\u00e7ons de r\u00e9sonner.",
+          "seasons": {
+            "spring": "",
+            "summer": "",
+            "autumn": "",
+            "winter": ""
+          },
+          "notes": {
+            "spring": "Le r\u00e9veil du vivant.",
+            "summer": "La pleine pr\u00e9sence.",
+            "autumn": "Les m\u00e9tamorphoses.",
+            "winter": "Les sons se font rares."
+          }
+        }
+      }
+    }
+  ]
+}
