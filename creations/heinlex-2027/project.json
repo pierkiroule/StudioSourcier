@@ -1,0 +1,476 @@
+{
+  "schemaVersion": "1.1.0",
+  "id": "7e141327-2027-4000-8000-000000000001",
+  "title": "Heinlex 2027 •° — Oreillez-vous !",
+  "description": "Treize invitations à rencontrer les paysages sonores de Heinlex. Écoutez autour de vous, découvrez des créations sonores et laissez une place à l’inattendu.",
+  "updatedAt": "2026-11-19T16:44:41.127Z",
+  "stops": [
+    {
+      "id": "44e67127-2027-4000-8000-000000000001",
+      "title": "Les sons lointains",
+      "experience": {
+        "moduleId": "soundscapes",
+        "moduleVersion": "1.1.0",
+        "type": "in-situ",
+        "data": {
+          "invitation": "Laissez venir les sons proches. Votre attention peut ensuite s’élargir vers un son plus éloigné, puis revenir près de vous. Rien n’oblige à tout entendre.",
+          "editorial": {
+            "panelInvitation": "Écoutez ce qui se passe tout près de vous.\nPuis laissez votre attention voyager vers le lointain.\nEntre les deux, que découvrez-vous ?",
+            "qrCaption": "Retrouvez et prolongez cette invitation sur votre téléphone.",
+            "everyday": "Quand une préoccupation prend toute la place, vers quoi pourriez-vous déplacer un instant votre attention ?",
+            "learning": "Déplacer volontairement son attention entre différents plans sonores.",
+            "competency": "Mobiliser sa souplesse attentionnelle et changer de perspective.",
+            "transpositions": "Patient : explorer un autre point d’attention. Aidant : considérer aussi les ressources du proche. Soignant : élargir son regard du problème immédiat au contexte de vie.",
+            "vigilance": "",
+            "wave": "horizon",
+            "location": "",
+            "owner": "",
+            "status": "draft",
+            "illustrationCredit": ""
+          },
+          "duration": null
+        }
+      }
+    },
+    {
+      "id": "44e67127-2027-4000-8000-000000000002",
+      "title": "Le presque silence",
+      "experience": {
+        "moduleId": "soundscapes",
+        "moduleVersion": "1.1.0",
+        "type": "in-situ",
+        "data": {
+          "invitation": "Rien à faire taire. Rien à réussir. Dans le calme relatif du lieu, laissez apparaître ce qui s’entend à peine.",
+          "editorial": {
+            "panelInvitation": "Entre deux sons, quelque chose demeure.\nUn souffle, un froissement, une présence discrète…\nQue laisse entendre ce presque silence ?",
+            "qrCaption": "Retrouvez et prolongez cette invitation sur votre téléphone.",
+            "everyday": "Dans votre quotidien, quelle place pourriez-vous laisser à une pause, même imparfaite ?",
+            "learning": "Découvrir des présences sonores dans un calme apparent.",
+            "competency": "Reconnaître des possibilités de pause et laisser une place au silence.",
+            "transpositions": "Patient : repérer une pause possible sans conditions idéales. Aidant : rester présent sans devoir remplir chaque silence. Soignant : laisser du temps à l’expression avant de relancer.",
+            "vigilance": "",
+            "wave": "silence",
+            "location": "",
+            "owner": "",
+            "status": "draft",
+            "illustrationCredit": ""
+          },
+          "duration": null
+        }
+      }
+    },
+    {
+      "id": "44e67127-2027-4000-8000-000000000003",
+      "title": "Les voix proches",
+      "experience": {
+        "moduleId": "soundscapes",
+        "moduleVersion": "1.1.0",
+        "type": "in-situ",
+        "data": {
+          "invitation": "Avant de chercher qui ou quoi produit ce son, écoutez sa cadence, son intensité et ses pauses. Puis laissez revenir les autres présences.",
+          "editorial": {
+            "panelInvitation": "Des pas, une voix, des feuilles, un souffle…\nLaissez une présence proche attirer votre attention.\nComment se fait-elle entendre ?",
+            "qrCaption": "Retrouvez et prolongez cette invitation sur votre téléphone.",
+            "everyday": "Dans une conversation, que découvririez-vous en écoutant un peu plus avant de conclure ?",
+            "learning": "Écouter les qualités d’un son au-delà de son identification.",
+            "competency": "Distinguer observation et interprétation ; explorer avant de conclure.",
+            "transpositions": "Patient : décrire son vécu avec ses mots. Aidant : vérifier plutôt que supposer les intentions du proche. Soignant : explorer le sens d’une parole avant de la traduire en hypothèse clinique.",
+            "vigilance": "",
+            "wave": "voices",
+            "location": "",
+            "owner": "",
+            "status": "draft",
+            "illustrationCredit": ""
+          },
+          "duration": null
+        }
+      }
+    },
+    {
+      "id": "44e67127-2027-4000-8000-000000000004",
+      "title": "Le vent invisible",
+      "experience": {
+        "moduleId": "soundscapes",
+        "moduleVersion": "1.1.0",
+        "type": "in-situ",
+        "data": {
+          "invitation": "Feuilles, branches, herbes ou vêtements : l’air rencontre différentes matières. Lorsqu’un mouvement apparaît, écoutez comment il commence, se transforme et s’apaise.",
+          "editorial": {
+            "panelInvitation": "Le vent ne se voit pas. Pourtant, il se raconte.\nÉcoutez ce qu’il fait frémir et suivez son passage.\nS’il se repose, que reste-t-il à entendre ?",
+            "qrCaption": "Retrouvez et prolongez cette invitation sur votre téléphone.",
+            "everyday": "Quels éléments autour de vous influencent votre confort ou votre disponibilité aux autres ?",
+            "learning": "Percevoir la relation entre mouvement, matière et son.",
+            "competency": "Reconnaître l’influence de l’environnement sur son vécu.",
+            "transpositions": "Patient : identifier des conditions de confort. Aidant : prendre en compte l’ambiance dans les réactions du proche. Soignant : considérer les conditions matérielles et sensorielles de la rencontre.",
+            "vigilance": "l’absence de vent est une situation recevable. Adapter la proposition au lieu sans simuler une présence sonore.",
+            "wave": "wind",
+            "location": "",
+            "owner": "",
+            "status": "draft",
+            "illustrationCredit": ""
+          },
+          "duration": null
+        }
+      }
+    },
+    {
+      "id": "44e67127-2027-4000-8000-000000000005",
+      "title": "Les rythmes du lieu",
+      "experience": {
+        "moduleId": "soundscapes",
+        "moduleVersion": "1.1.0",
+        "type": "in-situ",
+        "data": {
+          "invitation": "Un rythme peut retenir votre attention. Sans compter, écoutez ses retours et ses différences. D’autres rythmes le rejoignent-ils ?",
+          "editorial": {
+            "panelInvitation": "Écoutez ce qui revient, s’interrompt ou change d’allure.\nEntre deux sons, quelle place pour l’attente ?",
+            "qrCaption": "Retrouvez et prolongez cette invitation sur votre téléphone.",
+            "everyday": "Quel rythme vous conviendrait aujourd’hui ? Et à la personne que vous accompagnez, si c’est votre situation ?",
+            "learning": "Repérer répétitions, intervalles et variations.",
+            "competency": "Reconnaître ses rythmes et respecter des rythmes différents du sien.",
+            "transpositions": "Patient : repérer un besoin d’activité ou de repos. Aidant : ajuster son aide et préserver ses limites. Soignant : adapter le tempo des explications et laisser du temps à l’appropriation.",
+            "vigilance": "",
+            "wave": "rhythm",
+            "location": "",
+            "owner": "",
+            "status": "draft",
+            "illustrationCredit": ""
+          },
+          "duration": null
+        }
+      }
+    },
+    {
+      "id": "44e67127-2027-4000-8000-000000000006",
+      "title": "Le paysage entier",
+      "experience": {
+        "moduleId": "soundscapes",
+        "moduleVersion": "1.1.0",
+        "type": "in-situ",
+        "data": {
+          "invitation": "Votre attention peut passer d’un son à plusieurs, puis à toute la scène. Gardez l’ouverture qui vous convient. Vous pouvez revenir à un seul son.",
+          "editorial": {
+            "panelInvitation": "Écoutez devant vous, derrière, sur les côtés…\nPuis laissez les sons trouver leur place.\nQuel paysage apparaît ?",
+            "qrCaption": "Retrouvez et prolongez cette invitation sur votre téléphone.",
+            "everyday": "Dans une situation difficile, quels autres éléments mériteraient aussi votre attention ?",
+            "learning": "Passer d’un son isolé à une écoute d’ensemble.",
+            "competency": "Considérer plusieurs dimensions d’une situation et ses ressources.",
+            "transpositions": "Patient : se percevoir au-delà d’un symptôme. Aidant : voir aussi les capacités et envies du proche. Soignant : relier dimensions corporelles, psychiques, sociales et environnementales.",
+            "vigilance": "",
+            "wave": "landscape",
+            "location": "",
+            "owner": "",
+            "status": "draft",
+            "illustrationCredit": ""
+          },
+          "duration": null
+        }
+      }
+    },
+    {
+      "id": "44e67127-2027-4000-8000-000000000007",
+      "title": "Les voix des oiseaux",
+      "experience": {
+        "moduleId": "soundscapes",
+        "moduleVersion": "1.1.0",
+        "type": "seasonal",
+        "data": {
+          "invitation": "Laissez une voix attirer votre attention. Écoutez son déroulement et la place qu’elle prend parmi les autres présences.",
+          "editorial": {
+            "panelInvitation": "Une voix, une réponse, un silence…\nLes oiseaux dessinent un paysage.\nQu’entendez-vous aujourd’hui ?",
+            "qrCaption": "Découvrez une création sonore autour des voix des oiseaux.",
+            "everyday": "Dans vos échanges, quelle place reste-t-il au silence et à la réponse de l’autre ?",
+            "learning": "Suivre le déroulement d’une présence sonore vivante et ses interactions perçues.",
+            "competency": "Développer sa disponibilité au dialogue et à l’alternance.",
+            "transpositions": "Patient : prendre sa place dans l’échange. Aidant : écouter sans répondre systématiquement pour l’autre. Soignant : soutenir l’expression de chacun et observer la circulation de la parole.",
+            "vigilance": "distinguer une réponse perçue par l’auditeur d’une interprétation naturaliste établie.",
+            "wave": "birds",
+            "location": "",
+            "owner": "",
+            "status": "draft",
+            "illustrationCredit": ""
+          },
+          "url": "",
+          "transcript": "",
+          "credits": "",
+          "seasons": {
+            "spring": "",
+            "summer": "",
+            "autumn": "",
+            "winter": ""
+          },
+          "notes": {
+            "spring": "Suivez une voix : comment commence-t-elle, se répète-t-elle ou s’interrompt-elle ?",
+            "summer": "Écoutez la place des voix les unes par rapport aux autres, proches ou lointaines.",
+            "autumn": "Une présence brève peut transformer une ambiance. Laquelle retenez-vous ?",
+            "winter": "Entre deux voix, écoutez aussi les pauses et l’espace qui les sépare."
+          }
+        }
+      }
+    },
+    {
+      "id": "44e67127-2027-4000-8000-000000000008",
+      "title": "Le souffle des arbres",
+      "experience": {
+        "moduleId": "soundscapes",
+        "moduleVersion": "1.1.0",
+        "type": "seasonal",
+        "data": {
+          "invitation": "Laissez venir vos mots pour décrire cette matière sonore. Il n’y a pas de vocabulaire attendu.",
+          "editorial": {
+            "panelInvitation": "Feuilles, branches, air en mouvement…\nQuelle texture sonore vous parvient ?",
+            "qrCaption": "Découvrez une création sonore autour du souffle des arbres.",
+            "everyday": "Quels mots ou quelles images vous aideraient à partager ce que vous ressentez ?",
+            "learning": "Différencier et nommer une texture sonore avec ses propres mots.",
+            "competency": "Exprimer plus finement son expérience subjective et accueillir les mots de l’autre.",
+            "transpositions": "Patient : communiquer une sensation difficile à nommer. Aidant : accueillir une formulation singulière. Soignant : s’appuyer sur les mots de la personne plutôt que les remplacer immédiatement.",
+            "vigilance": "",
+            "wave": "branches",
+            "location": "",
+            "owner": "",
+            "status": "draft",
+            "illustrationCredit": ""
+          },
+          "url": "",
+          "transcript": "",
+          "credits": "",
+          "seasons": {
+            "spring": "",
+            "summer": "",
+            "autumn": "",
+            "winter": ""
+          },
+          "notes": {
+            "spring": "Quels mots vous viennent pour décrire ce bruissement ?",
+            "summer": "Cette matière sonore semble-t-elle légère, dense, continue ou changeante ?",
+            "autumn": "Une texture sonore évoque-t-elle une matière ou une image ?",
+            "winter": "Écoutez les reliefs les plus discrets, puis retrouvez le mouvement d’ensemble."
+          }
+        }
+      }
+    },
+    {
+      "id": "44e67127-2027-4000-8000-000000000009",
+      "title": "Le monde minuscule",
+      "experience": {
+        "moduleId": "soundscapes",
+        "moduleVersion": "1.1.0",
+        "type": "seasonal",
+        "data": {
+          "invitation": "Accordez un instant toute votre attention à un petit événement sonore. Vous pouvez ensuite retrouver le paysage qui l’entoure.",
+          "editorial": {
+            "panelInvitation": "Prêtez l’oreille aux petits bruissements.\nUn autre monde se laisse-t-il deviner ?",
+            "qrCaption": "Découvrez une création sonore attentive au monde minuscule.",
+            "everyday": "Quelle petite chose soutient votre quotidien, parfois sans que vous la remarquiez ?",
+            "learning": "Donner de l’importance à un détail habituellement négligé.",
+            "competency": "Identifier de petites ressources et reconnaître des changements modestes mais significatifs.",
+            "transpositions": "Patient : remarquer une ressource accessible. Aidant : percevoir une initiative ou une préférence discrète. Soignant : reconnaître un changement important pour la personne, même peu spectaculaire.",
+            "vigilance": "renseigner clairement toute amplification, prise de son spécialisée ou transformation.",
+            "wave": "particles",
+            "location": "",
+            "owner": "",
+            "status": "draft",
+            "illustrationCredit": ""
+          },
+          "url": "",
+          "transcript": "",
+          "credits": "",
+          "seasons": {
+            "spring": "",
+            "summer": "",
+            "autumn": "",
+            "winter": ""
+          },
+          "notes": {
+            "spring": "Laissez un petit détail devenir le centre de votre écoute.",
+            "summer": "Suivez un événement bref, puis laissez-en apparaître un autre.",
+            "autumn": "Quel détail éveille votre curiosité et vous donne envie d’écouter davantage ?",
+            "winter": "Accordez une place aux nuances ténues, ou accueillez simplement l’ensemble."
+          }
+        }
+      }
+    },
+    {
+      "id": "44e67127-2027-4000-8000-000000000010",
+      "title": "Les éléments",
+      "experience": {
+        "moduleId": "soundscapes",
+        "moduleVersion": "1.1.0",
+        "type": "seasonal",
+        "data": {
+          "invitation": "Laissez cette écoute faire naître une image ou un paysage intérieur. Aucune image n’est nécessaire : vous pouvez aussi simplement écouter.",
+          "editorial": {
+            "panelInvitation": "Air, eau, terre, matières…\nQuelles rencontres font entendre ce lieu ?",
+            "qrCaption": "Découvrez une création sonore inspirée des éléments.",
+            "everyday": "Si une image est venue, pourrait-elle vous aider à exprimer quelque chose de votre vécu ?",
+            "learning": "Explorer les images et associations suscitées par l’écoute.",
+            "competency": "Mobiliser l’imagination comme support personnel d’expression ou de ressourcement.",
+            "transpositions": "Patient : donner forme à un vécu. Aidant : partager une évocation sans devoir l’expliquer. Soignant : proposer un support en laissant la personne lui donner son sens.",
+            "vigilance": "",
+            "wave": "elements",
+            "location": "",
+            "owner": "",
+            "status": "draft",
+            "illustrationCredit": ""
+          },
+          "url": "",
+          "transcript": "",
+          "credits": "",
+          "seasons": {
+            "spring": "",
+            "summer": "",
+            "autumn": "",
+            "winter": ""
+          },
+          "notes": {
+            "spring": "Quels mouvements cette écoute vous fait-elle imaginer ?",
+            "summer": "Quelle scène apparaît lorsque vous laissez les sons se déployer ?",
+            "autumn": "Une matière semble-t-elle en rencontrer une autre ? Laissez venir vos images.",
+            "winter": "Cette création vous évoque-t-elle un lieu réel ou imaginaire ?"
+          }
+        }
+      }
+    },
+    {
+      "id": "44e67127-2027-4000-8000-000000000011",
+      "title": "Les heures du vivant",
+      "experience": {
+        "moduleId": "soundscapes",
+        "moduleVersion": "1.1.0",
+        "type": "seasonal",
+        "data": {
+          "invitation": "Écoutez cette ambiance en remarquant votre disponibilité du moment. Il n’est pas nécessaire de modifier votre état pour vivre l’expérience.",
+          "editorial": {
+            "panelInvitation": "Ce lieu aurait-il la même voix à une autre heure ?\nÉcoutez ce qui appartient à votre instant de passage.",
+            "qrCaption": "Découvrez une création sonore autour des heures du vivant.",
+            "everyday": "Cette ambiance vous conviendrait-elle de la même façon à un autre moment ?",
+            "learning": "Reconnaître l’influence du moment et de sa disponibilité sur l’écoute.",
+            "competency": "Ajuster ses choix ou ses propositions à des besoins variables.",
+            "transpositions": "Patient : ajuster une activité à son état du jour. Aidant : reconnaître qu’une aide appréciée hier peut ne pas convenir aujourd’hui. Soignant : réévaluer disponibilité, besoins et préférences.",
+            "vigilance": "ne pas présenter un enregistrement unique comme une comparaison documentée de plusieurs heures. Mentionner l’heure réelle si elle est connue.",
+            "wave": "time",
+            "location": "",
+            "owner": "",
+            "status": "draft",
+            "illustrationCredit": ""
+          },
+          "url": "",
+          "transcript": "",
+          "credits": "",
+          "seasons": {
+            "spring": "",
+            "summer": "",
+            "autumn": "",
+            "winter": ""
+          },
+          "notes": {
+            "spring": "À quelle heure cette ambiance vous transporte-t-elle ? Comment la recevez-vous aujourd’hui ?",
+            "summer": "Comment le rythme de cette création rencontre-t-il celui de votre journée ?",
+            "autumn": "Cette ambiance vous conviendrait-elle de la même façon à un autre moment ?",
+            "winter": "Remarquez votre disponibilité pour cette écoute, sans chercher à la modifier."
+          }
+        }
+      }
+    },
+    {
+      "id": "44e67127-2027-4000-8000-000000000012",
+      "title": "Les métamorphoses",
+      "experience": {
+        "moduleId": "soundscapes",
+        "moduleVersion": "1.1.0",
+        "type": "seasonal",
+        "data": {
+          "invitation": "Remarquez ce qui change dans les sons ou dans votre façon de les entendre. Il est aussi possible de ne percevoir aucun changement.",
+          "editorial": {
+            "panelInvitation": "Le lieu change, et notre écoute aussi.\nQu’est-ce qui vous semble différent aujourd’hui ?",
+            "qrCaption": "Découvrez une création sonore autour des métamorphoses du vivant.",
+            "everyday": "Qu’est-ce qui a évolué en vous, chez l’autre ou dans la situation, et mérite un regard nouveau ?",
+            "learning": "Observer les changements de sa perception au fil de l’écoute.",
+            "competency": "Reconnaître la variabilité du vécu et actualiser son regard.",
+            "transpositions": "Patient : remarquer l’évolution de ses sensations ou perceptions. Aidant : ne pas figer son proche dans une image passée. Soignant : réviser ses premières impressions et ses hypothèses.",
+            "vigilance": "",
+            "wave": "morph",
+            "location": "",
+            "owner": "",
+            "status": "draft",
+            "illustrationCredit": ""
+          },
+          "url": "",
+          "transcript": "",
+          "credits": "",
+          "seasons": {
+            "spring": "",
+            "summer": "",
+            "autumn": "",
+            "winter": ""
+          },
+          "notes": {
+            "spring": "Écoutez ce qui semble apparaître ou se déployer. Votre perception évolue-t-elle ?",
+            "summer": "Suivez une transformation de texture ou d’intensité. Que change-t-elle pour vous ?",
+            "autumn": "Un son prend-il une autre place au fil de votre écoute ?",
+            "winter": "Entendez-vous autrement ce qui était déjà présent au début ?"
+          }
+        }
+      }
+    },
+    {
+      "id": "44e67127-2027-4000-8000-000000000013",
+      "title": "L’inattendu",
+      "experience": {
+        "moduleId": "soundscapes",
+        "moduleVersion": "1.1.0",
+        "type": "surprise",
+        "data": {
+          "invitation": "Une création sonore vous attend. Vous pouvez l’écouter sans chercher tout de suite à la reconnaître. Libre à vous de poursuivre, de faire une pause ou d’en découvrir une autre.",
+          "editorial": {
+            "panelInvitation": "Quel son viendra vous surprendre aujourd’hui ?\nLaissez une place à l’inattendu.",
+            "qrCaption": "Découvrez une écoute surprise.",
+            "everyday": "Face à une proposition nouvelle, de quoi avez-vous besoin pour pouvoir choisir librement ?",
+            "learning": "Accueillir une découverte sonore avant de la catégoriser.",
+            "competency": "Explorer une part d’incertitude tout en conservant son pouvoir de choix.",
+            "transpositions": "Patient : essayer, refuser, adapter ou interrompre. Aidant : laisser de la place au choix du proche. Soignant : accueillir ce qui surprend et construire la suite avec la personne.",
+            "vigilance": "interrompre ou refuser une écoute est un choix légitime. Ne pas coder ce choix comme un échec. Prévoir plusieurs créations ; éviter deux propositions identiques consécutives lorsque la collection le permet.",
+            "wave": "surprise",
+            "location": "",
+            "owner": "",
+            "status": "draft",
+            "illustrationCredit": ""
+          },
+          "collection": []
+        }
+      }
+    }
+  ],
+  "relations": [],
+  "extensions": {
+    "soundscapes": {
+      "version": "1.0.0",
+      "subtitle": "Parcours d’écoute sensible au fil des saisons.",
+      "cta": "Explorer les 13 bornes",
+      "location": "Heinlex · Saint-Nazaire",
+      "status": "Proposition de travail · storyboard V0.4 · textes à valider",
+      "about": "Apprendre à écouter autrement le vivant, pour découvrir d’autres manières de prendre soin de soi, des autres et de la relation. Aucun apaisement, ressenti ou résultat particulier n’est attendu.",
+      "accessibility": "Aucun compte ni installation nécessaire. Pas de son automatique ni de microphone. Vous pouvez interrompre, reprendre ou quitter chaque expérience librement.",
+      "partnerHeading": "Avec le soutien de",
+      "partners": [],
+      "feedback": {
+        "question": "Que retenez-vous de cette expérience ?",
+        "instruction": "Touchez les propositions qui vous correspondent. Vous pouvez en choisir plusieurs, écrire un commentaire, ou les deux.",
+        "tags": [
+          "J’ai écouté autrement.",
+          "J’ai remarqué des détails.",
+          "J’ai pris un temps pour moi.",
+          "J’ai trouvé des mots pour mon ressenti.",
+          "J’ai pensé à ma façon d’écouter les autres.",
+          "J’ai trouvé une idée pour mon quotidien.",
+          "Je n’en retiens rien de particulier.",
+          "Certains moments m’ont été inconfortables."
+        ],
+        "commentLabel": "Quelques mots, si vous le souhaitez…",
+        "commentPlaceholder": "Un moment marquant, une découverte, une réserve ou une suggestion…",
+        "privacy": "Merci de ne pas indiquer de nom ni d’information permettant d’identifier une personne.",
+        "exclusiveTag": 6
+      }
+    }
+  }
+}

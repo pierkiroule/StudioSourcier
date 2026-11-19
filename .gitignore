@@ -7,3 +7,5 @@ coverage/
 *.zip
 
 *.log
+
+apps/studio/tests/compiled-player/

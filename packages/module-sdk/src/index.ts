@@ -19,6 +19,13 @@ export interface StudioModule {
   sdkVersion: typeof SDK_VERSION;
   label: string;
   experiences: readonly ExperienceDefinition[];
+  projectSchema?: z.ZodType;
+  ProjectEditor?: ComponentType<{
+    data: Project["extensions"][string];
+    onChange: (data: Project["extensions"][string]) => void;
+  }>;
+  ProjectIntro?: ComponentType<{ data: Project["extensions"][string] }>;
+  ProjectFooter?: ComponentType<{ data: Project["extensions"][string] }>;
 }
 export class ModuleRegistry {
   private modules = new Map<string, StudioModule>();
@@ -44,6 +51,20 @@ export class ModuleRegistry {
   list() {
     return [...this.modules.values()];
   }
+  available() {
+    const latest = new Map<string, StudioModule>();
+    for (const module of this.list()) {
+      const current = latest.get(module.id);
+      if (
+        !current ||
+        module.version.localeCompare(current.version, undefined, {
+          numeric: true,
+        }) > 0
+      )
+        latest.set(module.id, module);
+    }
+    return [...latest.values()];
+  }
   resolve(e: Experience) {
     const m = this.modules.get(e.moduleId + "@" + e.moduleVersion);
     if (!m)
@@ -62,6 +83,12 @@ export class ModuleRegistry {
     return e;
   }
   validateProject(p: Project) {
+    for (const [id, data] of Object.entries(p.extensions)) {
+      const module = this.available().find((m) => m.id === id);
+      if (!module?.projectSchema)
+        throw Error("Extension de projet inconnue : " + id);
+      module.projectSchema.parse(data);
+    }
     for (const stop of p.stops)
       if (stop.experience) this.validate(stop.experience);
     return p;

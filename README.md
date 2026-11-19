@@ -1,4 +1,4 @@
-# Sourciers Studio •° — V0.1
+# Sourciers Studio •° — V0.2
 
 Atelier local de parcours numériques, extensible par modules. Aucun lieu ni client n’est codé dans le moteur.
 
@@ -50,3 +50,11 @@ Remplacer l’URL par la destination réelle avant diffusion. La commande valide
 - [Vérifications et limites](docs/verification.md)
 
 La V0.1 fonctionne sans compte, sans clé et sans serveur de données. Supabase et les médias privés R2 disposent de points d’intégration ; leur activation nécessite une configuration réelle.
+
+## Heinlex 2027 : première création préchargée
+
+Le Studio propose désormais **Heinlex 2027 •° — Oreillez-vous !** avec les 13 bornes du storyboard V0.4. Ouvrir sa carte dans **Mes créations** pour éditer textes, saisons, panneaux, notes d’équipe, médias, partenaires et formulaire de retour. **Parcourir le projet** prévisualise le brouillon complet.
+
+Le parcours est également défini directement dans `creations/heinlex-2027/project.json` pour le faire évoluer par le code. Les modifications locales existantes sont préservées ; un bouton de rechargement confirmé permet de reprendre la nouvelle version du code. Voir [la documentation de la création](creations/heinlex-2027/README.md).
+
+Les audios et logos restent à fournir. Le formulaire de retour est un aperçu : la collecte partagée n’est pas activée.

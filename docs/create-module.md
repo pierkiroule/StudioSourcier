@@ -47,3 +47,7 @@ export const observationModule: StudioModule = {
 Les éditeurs doivent tolérer les saisies intermédiaires invalides : conserver un état de saisie permissif ou valider avant engagement. Le Player et les frontières de sauvegarde restent stricts. Voir les champs d’URL dans soundscapes.
 
 Le registre fonctionne par installation de packages et compilation. « Module indépendant » ne signifie pas installation à chaud : aucun catalogue, gestionnaire de plugins ou exécution de code tiers n’est inclus dans la V0.1.
+
+Un module peut désormais fournir `projectSchema`, `ProjectEditor`, `ProjectIntro` et `ProjectFooter` pour des réglages et des contenus au niveau du projet. Ces composants reçoivent uniquement le document JSON de `project.extensions[module.id]`. Le registre valide cette extension avant sauvegarde/publication. Voir soundscapes 1.1.0.
+
+Pour faire coexister plusieurs versions, enregistrer chacune dans `apps/registry.ts` et dans le publisher. Utiliser `registry.available()` pour les choix de nouvelles expériences et `registry.resolve()` pour interpréter exactement les documents existants.

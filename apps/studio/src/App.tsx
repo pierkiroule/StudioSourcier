@@ -9,30 +9,23 @@ import {
   type Project,
   type Stop,
 } from "@sourciers/core";
-import { ModuleRegistry } from "@sourciers/module-sdk";
-import { soundscapesModule } from "@sourciers/soundscapes";
 import { Brand, Empty, Field } from "@sourciers/design-system";
-import { StopPlayer } from "../../player/src/Player";
-export const registry = new ModuleRegistry().register(soundscapesModule);
-const STORAGE = "sourciers:current:v1";
-function load(): { project: Project; message: string } {
-  try {
-    const json = localStorage.getItem(STORAGE);
-    return {
-      project: json
-        ? registry.validateProject(parseProject(JSON.parse(json)))
-        : createProject(),
-      message: json ? "Brouillon local restauré." : "",
-    };
-  } catch {
-    return {
-      project: createProject(),
-      message: "Le brouillon stocké est invalide. Il n’a pas été remplacé.",
-    };
-  }
-}
-export function App() {
-  const [initial] = useState(load);
+import { StopPlayer, ProjectPlayer } from "../../player/src/Player";
+import { createStudioRegistry } from "../../registry";
+import { builtInCreations } from "../../../creations";
+import {
+  loadWorkspace,
+  loadCreation,
+  saveWorkspace,
+  savedProjects,
+} from "./workspace";
+export const registry = createStudioRegistry();
+export function App({ initialProject }: { initialProject?: Project } = {}) {
+  const [initial] = useState(() =>
+    initialProject ? { project: initialProject, message: "" } : loadWorkspace(),
+  );
+  const [fullPreview, setFullPreview] = useState(false);
+  const [resetCreation, setResetCreation] = useState<string>();
   const [project, setProject] = useState(initial.project);
   const [selected, setSelected] = useState<string>();
   const [message, setMessage] = useState(initial.message);
@@ -58,7 +51,7 @@ export function App() {
     if (!started) return;
     try {
       registry.validateProject(parseProject(project));
-      localStorage.setItem(STORAGE, serializeProject(project));
+      saveWorkspace(project);
       setMessage("Brouillon enregistré sur cet appareil.");
     } catch {
       setMessage(
@@ -76,12 +69,41 @@ export function App() {
   const definition = stop?.experience
     ? registry.resolve(stop.experience)
     : null;
+  if (fullPreview)
+    return (
+      <div className="full-preview">
+        <header className="preview-toolbar">
+          <button onClick={() => setFullPreview(false)}>
+            Retour au Studio
+          </button>
+          <span>
+            Aperçu de votre brouillon · modifications visibles immédiatement
+          </span>
+        </header>
+        <ProjectPlayer project={project} registry={registry} />
+      </div>
+    );
+  const openProject = (next: Project) => {
+    try {
+      saveWorkspace(project);
+      update(next);
+      setSelected(next.stops[0]?.id);
+      setPendingDelete(false);
+    } catch {
+      setMessage(
+        "Impossible de changer de projet : vérifiez la sauvegarde locale.",
+      );
+    }
+  };
   return (
     <div className="shell">
       <header className="topbar">
         <Brand />
         <div className="header-actions">
-          <span className="local-label">Local · V0.1</span>
+          <span className="local-label">Local · V0.2</span>
+          <button disabled={!!validation} onClick={() => setFullPreview(true)}>
+            Parcourir le projet
+          </button>
           <button onClick={() => setNewProject(true)}>Nouveau projet</button>
           <label
             className="button"
@@ -146,6 +168,66 @@ export function App() {
           </button>
         </div>
       </header>
+      <section className="creation-library" aria-label="Mes créations">
+        <div>
+          <span className="eyebrow">Mes créations</span>
+          <h2>Votre première création est déjà là.</h2>
+          <p>Ouvrez un parcours préparé, puis faites-le évoluer librement.</p>
+        </div>
+        {builtInCreations.map((c) => (
+          <article className="creation-card" key={c.slug}>
+            <span className="pill">Création préparée · {c.revision}</span>
+            <h3>{c.label}</h3>
+            <p>{c.summary}</p>
+            <button
+              className="primary"
+              disabled={!!validation}
+              onClick={() => {
+                try {
+                  openProject(loadCreation(c.slug));
+                } catch {
+                  setMessage(
+                    "Cette création ne peut pas être ouverte. Exportez votre brouillon avant de le réinitialiser.",
+                  );
+                }
+              }}
+            >
+              Ouvrir dans le Studio
+            </button>
+            <a
+              className="button"
+              href={"?creation=" + c.slug + "&view=player"}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Voir le parcours préparé
+            </a>
+            <button
+              className="quiet"
+              disabled={!!validation}
+              onClick={() => setResetCreation(c.slug)}
+            >
+              Recharger la version du code
+            </button>
+          </article>
+        ))}
+        <details className="saved-projects">
+          <summary>Mes brouillons sur cet appareil</summary>
+          {savedProjects().length ? (
+            savedProjects().map((p) => (
+              <button
+                key={p.id}
+                disabled={!!validation}
+                onClick={() => openProject(p)}
+              >
+                {p.title}
+              </button>
+            ))
+          ) : (
+            <p>Aucun autre brouillon enregistré.</p>
+          )}
+        </details>
+      </section>
       <section className="project-heading">
         <div>
           <span className="eyebrow">L’atelier des parcours sensibles</span>
@@ -185,6 +267,24 @@ export function App() {
           />
         </Field>
       </section>
+      {registry.available().map((m) => {
+        const Editor = m.ProjectEditor;
+        const data = project.extensions[m.id];
+        return Editor && data ? (
+          <details className="project-extension-editor" key={m.id}>
+            <summary>Accueil, partenaires et retour facultatif</summary>
+            <Editor
+              data={data}
+              onChange={(data) =>
+                update({
+                  ...project,
+                  extensions: { ...project.extensions, [m.id]: data },
+                })
+              }
+            />
+          </details>
+        ) : null;
+      })}
       {validation && (
         <p className="validation" role="alert">
           {validation}
@@ -284,7 +384,7 @@ export function App() {
                 </p>
               )}
               <div className="experience-types">
-                {registry.list().flatMap((m) =>
+                {registry.available().flatMap((m) =>
                   m.experiences.map((d) => (
                     <button
                       key={m.id + d.type}
@@ -311,6 +411,7 @@ export function App() {
               {definition && stop.experience && (
                 <div className="content-editor">
                   <definition.Editor
+                    key={stop.id + stop.experience.type}
                     data={stop.experience.data}
                     onChange={(data) =>
                       updateStop({
@@ -387,6 +488,37 @@ export function App() {
         Sourciers Studio •°{" "}
         <span>Un atelier pour faire résonner les lieux.</span>
       </footer>
+      {resetCreation && (
+        <div className="modal-backdrop">
+          <section
+            className="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="reset-title"
+          >
+            <h2 id="reset-title">Recharger le parcours préparé ?</h2>
+            <p>
+              Le brouillon de cette création sera remplacé par la version du
+              code. Exportez votre JSON pour conserver vos modifications.
+            </p>
+            <button onClick={() => setResetCreation(undefined)}>Annuler</button>
+            <button
+              className="primary"
+              onClick={() => {
+                const creation = builtInCreations.find(
+                  (c) => c.slug === resetCreation,
+                );
+                if (creation) {
+                  openProject(creation.create());
+                }
+                setResetCreation(undefined);
+              }}
+            >
+              Recharger le parcours
+            </button>
+          </section>
+        </div>
+      )}
       {newProject && (
         <div className="modal-backdrop">
           <section
@@ -404,6 +536,11 @@ export function App() {
             <button
               className="primary"
               onClick={() => {
+                try {
+                  saveWorkspace(project);
+                } catch {
+                  /* Explicit discard confirmed in the dialog. */
+                }
                 update(createProject());
                 setSelected(undefined);
                 setNewProject(false);
