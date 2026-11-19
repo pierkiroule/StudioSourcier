@@ -234,7 +234,7 @@ it("exports a real Player bundle with its media and stable stop QR codes", async
   const request = (async (input: RequestInfo | URL) =>
     String(input).endsWith("index.html")
       ? new Response(
-          '<html><head></head><body><script src="./assets/player.js"></script></body></html>',
+          '<html><head></head><body><script src="./assets/player.js"></script><script src="https://vercel.live/feedback.js"></script><script>window.injected=true</script></body></html>',
         )
       : new Response('console.log("player")')) as typeof fetch;
   const zip = unzipSync(
@@ -244,6 +244,8 @@ it("exports a real Player bundle with its media and stable stop QR codes", async
   expect(strFromU8(zip["media/" + asset.id + ".mp3"]!)).toBe("audio bytes");
   expect(zip["qr/" + p.stops[6]!.id + ".svg"]).toBeDefined();
   expect(strFromU8(zip["index.html"]!)).toContain("manifest.webmanifest");
+  expect(strFromU8(zip["index.html"]!)).not.toContain("vercel.live");
+  expect(strFromU8(zip["index.html"]!)).not.toContain("window.injected");
   expect(zip["sw.js"]).toBeDefined();
   await expect(buildPlayerArchive(p, [], "", request)).rejects.toThrow(
     "média local",

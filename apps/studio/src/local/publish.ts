@@ -23,7 +23,19 @@ export async function buildPlayerArchive(
     throw Error(
       "Le moteur d’export n’est pas disponible. Rechargez la dernière version du Studio.",
     );
-  const html = await htmlResponse.text();
+  // Hosting platforms may append preview/analytics scripts to served HTML.
+  // Export only the Player entry scripts from our built assets.
+  const document = new DOMParser().parseFromString(
+    await htmlResponse.text(),
+    "text/html",
+  );
+  for (const script of document.querySelectorAll("script")) {
+    if (
+      !/^\.\/assets\/[a-z0-9_.-]+\.js$/i.test(script.getAttribute("src") ?? "")
+    )
+      script.remove();
+  }
+  const html = "<!doctype html>" + document.documentElement.outerHTML;
   const paths = [...html.matchAll(/(?:src|href)="\.\/(assets\/[^"?#]+)"/g)].map(
     (m) => m[1]!,
   );
