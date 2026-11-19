@@ -1,0 +1,19 @@
+{
+  "name": "@sourciers/player",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@sourciers/core": "workspace:*",
+    "@sourciers/module-sdk": "workspace:*",
+    "@sourciers/design-system": "workspace:*",
+    "@sourciers/media": "workspace:*",
+    "@sourciers/soundscapes": "workspace:*",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  }
+}

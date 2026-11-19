@@ -1,0 +1,13 @@
+{
+  "name": "@sourciers/publisher",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@sourciers/core": "workspace:*",
+    "qrcode": "^1.5.4"
+  }
+}

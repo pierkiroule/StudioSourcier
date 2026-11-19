@@ -1,0 +1,14 @@
+{
+  "name": "@sourciers/module-sdk",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@sourciers/core": "workspace:*",
+    "zod": "^4.1.12",
+    "react": "^19.2.0"
+  }
+}
